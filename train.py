@@ -15,7 +15,7 @@ tokenizer = GPT2TokenizerFast.from_pretrained('EleutherAI/gpt-j-6B')
 
 # Tokenize the dataset
 def tokenize_function(examples):
-    return tokenizer(examples['text'])
+    return tokenizer(examples['chosen'])
 
 tokenized_dataset = dataset.map(
     tokenize_function,
@@ -23,6 +23,7 @@ tokenized_dataset = dataset.map(
     num_proc=4,
     remove_columns=['prompt', 'chosen', 'rejected']
 )
+
 # Define the training arguments
 training_args = TrainingArguments(
     output_dir='./results',
